@@ -1,0 +1,5 @@
+streamlit
+chromadb
+zhipuai
+python-dotenv
+pymupdf4llm
