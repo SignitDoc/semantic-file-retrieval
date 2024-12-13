@@ -26,6 +26,5 @@ streamlit run main.py
 - [ ] Support retrieve image by image
 - [ ] Support batch uploading(upload folders) 
 - [ ] Provide restful APIs for customized integration
-- [ ] Support Docker deployment
 - [ ] Support scanned pdf
 - [ ] Support offline processing for large files
