@@ -1,23 +1,20 @@
 import chromadb
-import os
 from dotenv import load_dotenv
-from jsonschema.exceptions import relevance
-
 from file_parser import get_embedding
+import os
 
 load_dotenv()
-chroma_host = os.getenv("CHROMA_HOST") or "localhost"
-chroma_port = int(os.getenv("CHROMA_PORT") or "8000")
-chroma_collection_name = os.getenv("CHROMA_COLLECTION_NAME") or "test"
 
-chroma_client = chromadb.HttpClient(
-    host=chroma_host,
-    port=chroma_port,
-)
+chroma_client = chromadb.PersistentClient(path=".chromadb")
 
 my_collection = chroma_client.get_or_create_collection(
-    name=chroma_collection_name, metadata={"hnsw:space": "cosine"}
+    name="local", metadata={"hnsw:space": "cosine"}
 )
+
+UPLOAD_DIR = "uploaded_files"
+
+if not os.path.exists(UPLOAD_DIR):
+    os.makedirs(UPLOAD_DIR)
 
 
 def retrieve_file(query_text: str, limit: int = 5):
@@ -35,7 +32,7 @@ def retrieve_file(query_text: str, limit: int = 5):
         if relevance > 0.5:
             file_list.append(
                 {
-                    "file_path": results["ids"][0][i],
+                    "file_name": results["ids"][0][i],
                     "relevance": 1 - results["distances"][0][i],
                 }
             )

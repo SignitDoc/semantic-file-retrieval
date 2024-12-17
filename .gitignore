@@ -1,6 +1,7 @@
 uploaded_files
 test.py
 .idea
+.chromadb
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

@@ -1,11 +1,9 @@
 import streamlit as st
-import base64
 import os
 import uuid
 from streamlit_pdf_viewer import pdf_viewer
 
 
-@st.dialog("预览", width="large")
 def preview_file(preview_file_path):
     file_ext = get_file_ext(preview_file_path)
     # 图片预览
@@ -20,6 +18,11 @@ def preview_file(preview_file_path):
         pdf_viewer(preview_file_path)
 
 
+@st.dialog("预览", width="large")
+def preview_file_with_dialog(*args):
+    preview_file(*args)
+
+
 def generate_file_uuid(file_name):
     """为文件名后追加6位uuid"""
 
@@ -29,7 +32,7 @@ def generate_file_uuid(file_name):
     return file_name_without_ext + "_" + file_uuid + file_ext
 
 
-def get_file_ext(file_path: str) -> str:
+def get_file_ext(file_path):
     """获取文件后缀名"""
 
     return os.path.splitext(file_path)[-1]

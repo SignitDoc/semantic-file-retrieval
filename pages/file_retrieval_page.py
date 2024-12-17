@@ -1,6 +1,8 @@
 import streamlit as st
-from utils import preview_file
-from vector_db import retrieve_file
+from utils import get_file_ext, preview_file_with_dialog
+from db import retrieve_file, UPLOAD_DIR
+import os
+
 
 # 文件语义检索界面
 st.title("语义检索")
@@ -12,25 +14,19 @@ query_text = st.text_input(
 )
 
 st.divider()
-st.subheader("搜索结果(返回相关度最高的三个结果)")
-
-col1, col2, col3 = st.columns([5, 1, 1])
-with col1:
-    st.write("文件名")
-with col2:
-    st.write("相关度")
-with col3:
-    st.write("操作")
+st.subheader("搜索结果(返回相关度最高的前三个结果)")
 
 if query_text:
     file_list = retrieve_file(query_text)
-    col1, col2, col3 = st.columns([5, 1, 1])
-    for file_item in file_list:
-        file_path = file_item["file_path"]
-        with col1:
-            st.write(file_path)
-        with col2:
-            st.write(f"{file_item['relevance']:.2%}")
-        with col3:
-            if st.button("预览", key=f"{file_path}_preview"):
-                preview_file(file_path)
+    for index, file_item in enumerate(file_list):
+        file_name = file_item["file_name"]
+        file_path = os.path.join(UPLOAD_DIR, file_name)
+        ext = get_file_ext(file_name)
+        st.html(f"{index+1}. <b>文件名：</b>{file_name}")
+        st.html(f"<b>相关度：</b>{file_item['relevance']:.2%}")
+        if ext in [".jpg", "jpeg", ".png"]:
+            st.image(file_path, caption=file_name)
+        else:
+            if st.button("预览", key=f"{file_name}_preview"):
+                preview_file_with_dialog(file_path)
+        st.html("<br/>")
