@@ -5,7 +5,7 @@ A light semantic file retrieval application based on LLM
 ![architecture_image](assets/architecture.png)
 
 ## Demo
-<video src="assets/demo1.mp4" controls="controls"></video>
+<video src="https://github.com/SignitDoc/semantic-file-retrieval/blob/main/assets/demo1.mp4" controls="controls"></video>
 
 ## Quick Start
 1. Install Dependencies
@@ -30,7 +30,7 @@ docker build -t semantic-file-retrieval:latest .
 ```bash
 docker run -d -e GLM_API_KEY="your_api_key" -p 8501:8501 semantic-file-retrieval:latest
 ```
-> _All the environment variables in .env file can be overridden by docker run command__
+> _All the environment variables in .env file can be overridden by docker run command_
 
 ## TODO
 - [ ] Support audios
