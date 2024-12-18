@@ -1,11 +1,11 @@
 # semantic-file-retrieval
-A light semantic file retrieval application based on LLM
+A lightweight semantic file retrieval application based on LLM and vector db.
 
 ## Architecture
 ![architecture_image](assets/architecture.png)
 
 ## Demo
-<video src="https://github.com/SignitDoc/semantic-file-retrieval/blob/main/assets/demo1.mp4" controls="controls"></video>
+https://github.com/user-attachments/assets/f1590c6f-5d5c-44c6-8370-591ed66e7452
 
 ## Quick Start
 1. Install Dependencies
