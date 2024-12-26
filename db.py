@@ -17,7 +17,7 @@ if not os.path.exists(UPLOAD_DIR):
     os.makedirs(UPLOAD_DIR)
 
 
-def retrieve_file(query_text: str, limit: int = 5):
+def retrieve_file(query_text: str, limit: int = 3):
     """ "将搜索文本转为向量搜素，返回最相关的前n个结果"""
 
     query_embedding = get_embedding(query_text)

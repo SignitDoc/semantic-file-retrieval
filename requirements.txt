@@ -4,3 +4,4 @@ zhipuai
 python-dotenv
 pymupdf4llm
 streamlit-pdf-viewer
+ollama
