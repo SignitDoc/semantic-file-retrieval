@@ -30,7 +30,7 @@ docker build -t semantic-file-retrieval:latest .
 
 2. 运行容器
 ```bash
-docker run -d -e GLM_API_KEY="your_api_key" -p 8501:8501 semantic-file-retrieval:latest
+docker run -d -e OLLAMA_BASE_URL="http://x.x.x.x:11434" -p 8501:8501 semantic-file-retrieval:latest
 ```
 > _.env文件中的所有配置均可通过docker运行命令的环境变量参数覆盖_
 
