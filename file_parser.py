@@ -1,5 +1,5 @@
 from zhipuai import ZhipuAI
-from ollama import Client
+import ollama
 from dotenv import load_dotenv
 import os
 import re
@@ -11,12 +11,17 @@ load_dotenv()
 OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL")
 GLM_API_KEY = os.getenv("GLM_API_KEY")
 channel = ""
+
 if OLLAMA_BASE_URL:
-    ollama_client = Client(OLLAMA_BASE_URL)
+    ollama_client = ollama.Client(OLLAMA_BASE_URL)
     channel = "ollama"
     print("\033[1;32m当前大模型通道为Ollama\033[0m")
+    print("正在下载模型...")
+    ollama_client.pull("minicpm-v")
+    ollama_client.pull("bge-m3")
+    print("模型下载完成")
 elif GLM_API_KEY:
-    glm_client = ZhipuAI(api_key=os.getenv("GLM_API_KEY"))
+    glm_client = ZhipuAI(api_key=GLM_API_KEY)
     channel = "glm"
     print("\033[1;36m当前大模型通道为GLM API\033[0m")
 else:
