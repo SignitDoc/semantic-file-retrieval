@@ -20,9 +20,8 @@ st.markdown(
 
 app = st.navigation(
     [
-        st.Page("pages/file_uploading_page.py", title="文件上传"),
         st.Page("pages/file_management_page.py", title="文件管理"),
-        st.Page("pages/file_retrieval_page.py", title="语义检索"),
+        st.Page("pages/file_retrieval_page.py", title="文件检索"),
     ]
 )
 app.run()

@@ -1,6 +1,8 @@
 # 文件语义检索
 一个轻量级基于大模型解析的多模态文件语义检索工具，不同于传统基于文件名或metadata检索的方式，该工具可实现基于文件内容的语义检索，支持各类主流格式文档、图片、音频、视频。
 
+Read this in [English](README_en.md)
+
 ## 架构
 ![架构图](assets/architecture.png)
 
