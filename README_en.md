@@ -1,6 +1,8 @@
 # semantic-file-retrieval
 A lightweight semantic file retrieval application based on LLM and vector db.
 
+[中文版README](README.md)
+
 ## Architecture
 ![architecture_image](assets/architecture.png)
 
