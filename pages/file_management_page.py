@@ -1,8 +1,9 @@
 import streamlit as st
 import os
 from utils import preview_file_with_dialog
-from db import my_collection, UPLOAD_DIR
-from file_parser import parse_image, parse_txt_or_md, parse_pdf, get_embedding
+from core.vector_db import my_collection, UPLOAD_DIR
+from core.file_parser import parse_image, parse_txt_or_md, parse_pdf
+from core.llm_processor import get_embedding
 from utils import get_file_ext, preview_file
 
 # 文件管理页面

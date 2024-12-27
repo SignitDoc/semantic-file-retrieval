@@ -1,6 +1,6 @@
 import chromadb
 from dotenv import load_dotenv
-from file_parser import get_embedding
+from core.llm_processor import get_embedding
 import os
 
 load_dotenv()

@@ -1,6 +1,6 @@
 import streamlit as st
 from utils import get_file_ext, preview_file_with_dialog
-from db import retrieve_file, UPLOAD_DIR
+from core.vector_db import retrieve_file, UPLOAD_DIR
 import os
 
 
