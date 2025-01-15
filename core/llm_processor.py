@@ -2,6 +2,8 @@ from dotenv import load_dotenv
 from zhipuai import ZhipuAI
 import ollama
 import os
+from pathlib import Path
+import json
 
 load_dotenv()
 
@@ -107,4 +109,43 @@ def get_image_description(base64_image):
                 }
             ],
         )
+        return response.choices[0].message.content
+
+
+def get_mp4_description(base64_video):
+    # 将视频转化为文字
+    if channel == "ollama":
+        pass
+    else:
+        response = glm_client.chat.completions.create(
+            model="glm-4v-plus",  # 填写需要调用的模型名称
+            messages=[
+                {
+                    "role": "user",
+                    "content": [
+                        {"type": "video_url", "video_url": {"url": base64_video}},
+                        {"type": "text", "text": "请仔细描述这个视频"},
+                    ],
+                }
+            ],
+        )
+        return response.choices[0].message.content
+
+
+def get_office_description(file_url):
+    if channel == "ollama":
+        pass
+    else:
+        file_object = glm_client.files.create(
+            file=Path(file_url), purpose="file-extract"
+        )
+        file_content = json.loads(
+            glm_client.files.content(file_id=file_object.id).content
+        )["content"]
+        message_content = f"请对\n{file_content}\n的内容进行分析，并用一段话总结描述。"
+        response = glm_client.chat.completions.create(
+            model="glm-4-long",
+            messages=[{"role": "user", "content": message_content}],
+        )
+        print(response.choices[0].message.content)
         return response.choices[0].message.content

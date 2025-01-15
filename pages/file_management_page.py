@@ -2,7 +2,13 @@ import streamlit as st
 import os
 from utils import preview_file_with_dialog
 from core.vector_db import my_collection, UPLOAD_DIR
-from core.file_parser import parse_image, parse_txt_or_md, parse_pdf
+from core.file_parser import (
+    parse_image,
+    parse_txt_or_md,
+    parse_pdf,
+    parse_mp4,
+    parse_office,
+)
 from core.llm_processor import get_embedding
 from utils import get_file_ext, preview_file
 
@@ -14,7 +20,21 @@ tab1, tab2 = st.tabs(["文件上传", "文件列表"])
 with tab1:
     uploaded_file = st.file_uploader(
         "选择要上传的文件",
-        type=["jpg", "jpeg", "png", "txt", "md", "pdf"],
+        type=[
+            "jpg",
+            "jpeg",
+            "png",
+            "txt",
+            "md",
+            "pdf",
+            "mp4",
+            "docx",
+            "xlsx",
+            "pptx",
+            ".doc",
+            ".ppt",
+            ".xls",
+        ],
     )
     uploaded_file_path = ""
     if uploaded_file is not None:
@@ -39,6 +59,11 @@ with tab1:
                     document_content = parse_txt_or_md(uploaded_file_path)
                 elif file_ext == ".pdf":
                     document_content = parse_pdf(uploaded_file_path)
+                elif file_ext == ".mp4":
+                    document_content = parse_mp4(uploaded_file_path)
+                elif file_ext in [".docx", ".xlsx", ".pptx", ".doc", ".ppt", ".xls"]:
+                    # 这个接口也可以处理pdf
+                    document_content = parse_office(uploaded_file_path)
                 else:
                     st.error("暂不支持该文件类型!")
 
