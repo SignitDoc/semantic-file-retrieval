@@ -1,7 +1,12 @@
 import re
 import base64
 import pymupdf4llm
-from core.llm_processor import get_abstract, get_image_description
+from core.llm_processor import (
+    get_abstract,
+    get_image_description,
+    get_mp4_description,
+    get_office_description,
+)
 
 
 def get_word_count(content: str) -> int:
@@ -32,6 +37,18 @@ def parse_txt_or_md(file_path):
         return abstract_text
     else:
         return content
+
+
+def parse_office(file_path):
+    office_description = get_office_description(file_path)
+    return office_description
+
+
+def parse_mp4(file_path):
+    with open(file_path, "rb") as video_file:
+        base64_mp4 = base64.b64encode(video_file.read()).decode("utf-8")
+        image_description = get_mp4_description(base64_mp4)
+        return image_description
 
 
 def parse_pdf(file_path):

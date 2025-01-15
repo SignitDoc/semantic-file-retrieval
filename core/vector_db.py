@@ -1,6 +1,7 @@
 import chromadb
 from dotenv import load_dotenv
 from core.llm_processor import get_embedding
+from core.file_parser import parse_image
 import os
 
 load_dotenv()
@@ -36,4 +37,11 @@ def retrieve_file(query_text: str, limit: int = 3):
                     "relevance": 1 - results["distances"][0][i],
                 }
             )
+    return file_list
+
+
+def retrieve_file_by_image(file_path: str, limit: int = 3):
+    # 根据图片搜索文件
+    text = parse_image(file_path)
+    file_list = retrieve_file(text, limit)
     return file_list
